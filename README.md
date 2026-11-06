@@ -25,7 +25,7 @@ Evidence: 3 commits and one prompt about a rejected token.
 
 | Before (no skill) | After |
 |:--|:--|
-| Hari ini saya sangat senang bisa belajar banyak hal baru yang luar biasa. Saya membuat fitur dengan sempurna dan semua berjalan lancar. Semoga hari esok lebih baik! | **Uraian aktivitas** <br>- Dibuat endpoint login berbasis JWT. <br>- Ditulis tes unit untuk validasi token. <br>- Diperbaiki urutan middleware yang menolak token valid. |
+| Hari ini saya sangat senang bisa belajar banyak hal baru yang luar biasa. Saya membuat fitur dengan sempurna dan semua berjalan lancar. Semoga hari esok lebih baik! | **Uraian aktivitas** <br>- Membuat endpoint login berbasis JWT. <br>- Menulis tes unit untuk validasi token. <br>- Memperbaiki urutan middleware yang menolak token valid. |
 
 More in [`examples.md`](skills/maganghub-autofill/references/examples.md).
 

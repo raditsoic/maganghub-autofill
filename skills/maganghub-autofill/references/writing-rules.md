@@ -5,7 +5,7 @@ Each rule has an ID (`W-xx`) referenced from `SKILL.md`. Rule explanations are i
 | Group | Rules |
 |---|---|
 | Facts | W-01 facts only from evidence, W-02 real struggles only, W-03 lessons follow activities |
-| Perspective | W-10 no person perspective, W-11 vary passives |
+| Perspective | W-10 no person perspective, W-11 active verbs, not di- passives |
 | Language | W-20 standard Indonesian, W-21 empty vocabulary, W-22 em dash and openers, W-23 hyperbole |
 | Structure | W-30 activity bullets, W-31 one paragraph, W-32 100 characters |
 | Safety | W-40 no secrets |
@@ -24,10 +24,10 @@ Each rule has an ID (`W-xx`) referenced from `SKILL.md`. Rule explanations are i
 - **Pattern:** an activity, result, or struggle that appears neither in the `collect_today.py` output nor in the user's notes.
 - **Why it fails:** the mentor reads the report and uses it for evaluation. A fabrication sounds convincing but is false, and it is the one pattern that is always a defect even when it reads well.
 - **Before:**
-  > Dilakukan rapat koordinasi dengan tim produk untuk membahas roadmap kuartal depan.
+  > Mengadakan rapat koordinasi dengan tim produk untuk membahas roadmap kuartal depan.
   > (no meeting in the evidence or notes)
 - **After:**
-  > Dirancang skema tabel `users` dan `sessions` untuk modul autentikasi.
+  > Merancang skema tabel `users` dan `sessions` untuk modul autentikasi.
   > (taken from a real commit or prompt)
 
 ### W-02 Struggles only if real
@@ -56,21 +56,21 @@ Each rule has an ID (`W-xx`) referenced from `SKILL.md`. Rule explanations are i
 
 - **Pattern:** "saya", "aku", "kami", "kita", "penulis", and other pronouns that point at the actor. Includes "Anda" and the suffix "-ku".
 - **Why it fails:** the user's requirement is an impersonal report.
-- **Technique:** open sentences with a passive verb (di-), an activity noun (pengembangan, penyusunan), or the object as subject.
+- **Technique:** open each activity with an active meN- verb (Membuat, Menyusun, Memasang), which needs no pronoun. For lessons and struggles, use an activity noun (pemahaman, penyusunan) or the object as subject.
 - **Before:**
   > Hari ini saya membuat endpoint login dan saya menulis tes untuknya.
 - **After:**
-  > Dibuat endpoint login beserta tes unit untuk memverifikasi respons sukses dan gagal.
+  > Membuat endpoint login beserta tes unit untuk memverifikasi respons sukses dan gagal.
 
-### W-11 Vary passives and nominalizations
+### W-11 Active verbs, not di- passives
 
-- **Pattern:** every sentence opens with "Dilakukan ..." or "Dibuat ...".
-- **Why it fails:** a uniform rhythm reads as mechanical, and "Dilakukan" with no following verb carries no meaning.
+- **Pattern:** activity bullets that open with a passive di- verb: "Dibuat ...", "Disusun ...", "Dipasang ...", or with an empty "Dilakukan ...".
+- **Why it fails:** the passive reads as stiff and mechanical. The user's required style is an active meN- verb with the actor left implicit, which still avoids any pronoun.
 - **Before:**
-  > Dilakukan pembuatan fitur. Dilakukan pengujian fitur. Dilakukan perbaikan fitur.
+  > Dibuat fitur ekspor laporan ke CSV. Dilakukan pengujian fitur. Diperbaiki format tanggal.
 - **After:**
-  > Dibuat fitur ekspor laporan ke CSV. Pengujian dengan 3 contoh data menemukan kolom tanggal salah format, lalu format diperbaiki.
-- **Not a ban:** passive is correct here. Only avoid repeating the same opening back to back.
+  > Membuat fitur ekspor laporan ke CSV. Menguji fitur dengan 3 contoh data, menemukan kolom tanggal salah format, lalu memperbaikinya.
+- **Scope:** applies to the opening verb of every activity bullet. Inside lessons and struggles, a passive clause is allowed when the object is the real subject, but prefer the active form. Vary the verbs; do not open every bullet with the same one.
 
 ## Language
 

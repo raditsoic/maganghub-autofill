@@ -68,6 +68,7 @@ Read `references/writing-rules.md`. Hard rules in short:
 | W-01 | Facts only from evidence or user notes |
 | W-02 | Struggles must be real; none found → ask |
 | W-10 | No person perspective: not saya, aku, kami, kita, penulis, Anda |
+| W-11 | Each activity opens with an active meN- verb (Membuat, Menyusun, Memasang), not a di- passive |
 | W-20 | Standard Indonesian; technical terms stay in their original form |
 | W-21 | No empty vocabulary: pengalaman berharga, luar biasa, etc. |
 | W-22 | No em dash |
@@ -106,6 +107,7 @@ Automatic checks:
 | G-3 | No meta tags or notes |
 | G-4 | No em dash |
 | G-5 | Activities: 3-7 lines, all bulleted |
+| G-8 | Each activity opens with an active meN- verb, not a di- passive |
 | G-6 | Lessons and struggles: one paragraph, no bullets |
 | G-7 | No empty clichés |
 

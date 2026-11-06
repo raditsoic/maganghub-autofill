@@ -9,9 +9,9 @@ Evidence: 3 commits (`feat: endpoint login JWT`, `test: validasi token`, `fix: u
 
 **Uraian aktivitas**
 ```
-- Dibuat endpoint login berbasis JWT pada layanan backend.
-- Ditulis tes unit untuk validasi token akses dan token kedaluwarsa.
-- Diperbaiki urutan middleware yang menyebabkan token valid ditolak.
+- Membuat endpoint login berbasis JWT pada layanan backend.
+- Menulis tes unit untuk validasi token akses dan token kedaluwarsa.
+- Memperbaiki urutan middleware yang menyebabkan token valid ditolak.
 ```
 
 **Pembelajaran yang diperoleh**
@@ -30,9 +30,9 @@ Evidence: 1 commit (`docs: perbarui README`), prompt about writing installation 
 
 **Uraian aktivitas**
 ```
-- Diperbarui README proyek dengan langkah instalasi dan contoh penggunaan.
-- Disusun daftar variabel lingkungan yang dibutuhkan untuk menjalankan layanan secara lokal.
-- Dicoba ulang seluruh langkah instalasi pada lingkungan bersih untuk memastikan dokumentasi akurat.
+- Memperbarui README proyek dengan langkah instalasi dan contoh penggunaan.
+- Menyusun daftar variabel lingkungan yang dibutuhkan untuk menjalankan layanan secara lokal.
+- Mencoba ulang seluruh langkah instalasi pada lingkungan bersih untuk memastikan dokumentasi akurat.
 ```
 
 **Pembelajaran yang diperoleh**
@@ -51,9 +51,9 @@ Evidence: chat prompt about studying the database schema; user note: "meeting wi
 
 **Uraian aktivitas**
 ```
-- Dipelajari skema basis data modul pesanan untuk memahami relasi antar tabel.
-- Dilakukan pembahasan desain tabel pesanan bersama mentor.
-- Disusun rancangan awal kolom dan relasi tabel pesanan berdasarkan hasil pembahasan.
+- Mempelajari skema basis data modul pesanan untuk memahami relasi antar tabel.
+- Membahas desain tabel pesanan bersama mentor.
+- Menyusun rancangan awal kolom dan relasi tabel pesanan berdasarkan hasil pembahasan.
 ```
 
 **Pembelajaran yang diperoleh**
