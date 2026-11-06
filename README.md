@@ -133,6 +133,16 @@ skills/maganghub-autofill/
 - Verified once, on 2026-11-06 with omp and Brave through the relay: the form was filled and read back correctly. Submitting was not exercised. The portal can change; `references/form.md` describes the flow as seen on that date.
 - Chat history is read from `~/.claude/projects` and `~/.omp/agent/sessions`. Other agents are not supported.
 
+## Releasing
+
+Versions follow [SemVer](https://semver.org/); changes are listed in [CHANGELOG.md](CHANGELOG.md).
+
+1. Add entries under `## [Unreleased]` in `CHANGELOG.md` as you work.
+2. Run `scripts/release.sh <version>`. It bumps `.claude-plugin/plugin.json` and both `marketplace.json` files, rolls the changelog, commits `chore(release): vX.Y.Z`, and tags `vX.Y.Z`.
+3. Run `git push origin main --follow-tags`. The `release` workflow checks that the tag matches the manifests and creates the GitHub release from the changelog section.
+
+Users update with `omp plugin upgrade maganghub-autofill@maganghub-autofill`.
+
 ## License
 
 Code and docs: MIT — see LICENSE.
