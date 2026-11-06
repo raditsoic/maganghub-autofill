@@ -1,0 +1,12 @@
+{
+  "name": "maganghub-autofill",
+  "displayName": "maganghub-autofill",
+  "version": "0.1.0",
+  "description": "Susun dan isi laporan harian MagangHub Kemnaker dari chat agent dan git commit hari ini.",
+  "author": {
+    "name": "raditsoic"
+  },
+  "license": "MIT",
+  "keywords": ["maganghub", "kemnaker", "laporan-harian", "agent-skills"],
+  "skills": ["./skills/"]
+}
