@@ -7,7 +7,7 @@ Each rule has an ID (`W-xx`) referenced from `SKILL.md`. Rule explanations are i
 | Facts | W-01 facts only from evidence, W-02 real struggles only, W-03 lessons follow activities |
 | Perspective | W-10 no person perspective, W-11 active verbs, not di- passives |
 | Language | W-20 standard Indonesian, W-21 empty vocabulary, W-22 em dash and openers, W-23 hyperbole |
-| Structure | W-30 activity bullets, W-31 one paragraph, W-32 100 characters |
+| Structure | W-30 activity bullets, W-31 one paragraph, W-32 100 characters, W-33 outline level only |
 | Safety | W-40 no secrets |
 | Form text | W-50 no meta |
 
@@ -107,7 +107,20 @@ Each rule has an ID (`W-xx`) referenced from `SKILL.md`. Rule explanations are i
 
 ### W-30 Activities as bullets
 
-- **Rule:** 3 to 7 lines, each starting with `- `, one activity per line, one concrete sentence: what was done and the result. Merge commits and prompts that belong to one piece of work.
+- **Rule:** 3 to 5 lines, each starting with `- `, one activity per line, one sentence: what was done and the result. Merge commits and prompts that belong to one piece of work.
+
+### W-33 Outline level only
+
+- **Pattern:** routine steps and small fixes listed as their own activities: pulling the latest changes, renaming a file, fixing a typo, running a command, retrying a failed step, installing a dependency.
+- **Why it fails:** the mentor wants the big picture of the day. Small steps bury the real outcomes and make the report read like a shell history.
+- **Rule:** report only the major outcomes: a feature built, a design decided, a problem investigated, a document written, a deployment done. Fold small steps into the outcome they serve or drop them. Test: if removing the line would not change what the mentor understands about the day, drop it. Same for lessons and struggles: one or two main points, not every hiccup.
+- **Before:**
+  > - Menarik perubahan terbaru dari repositori.
+  > - Memperbaiki salah ketik pada README.
+  > - Mengganti nama berkas konfigurasi.
+  > - Membuat modul autentikasi berbasis JWT.
+- **After:**
+  > - Membuat modul autentikasi berbasis JWT beserta pengujiannya.
 
 ### W-31 Lessons and struggles in one paragraph
 

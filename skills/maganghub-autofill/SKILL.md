@@ -58,6 +58,7 @@ Prompts are truncated at 1500 characters. If a truncation drops important contex
 - Drop non-work: throwaway tests (`tes`), small talk, one-off tooling commands with no outcome.
 - Drop meta-work: running, testing, or debugging this skill itself (prompts such as "use the maganghub-autofill skill", "run the collector", "show the draft"). Keep real work done on the skill's code only if the user's notes say it is internship work.
 - Merge prompts and commits that belong to one piece of work into one activity.
+- Keep the big outline only (W-33): 3-5 major outcomes. Drop or fold routine steps such as pulling changes, renaming files, typo fixes, retries, and install commands. Do the same for lessons and struggles: one or two main points.
 - Facts only from evidence or user notes (W-01). No facts in either → **stop and ask the user** what was done. Never guess.
 - Struggles: look for errors, bugs, reverts, or repeated retries in the evidence. Nothing found and the user did not mention any → ask the user (W-02). Never invent a struggle.
 
@@ -91,7 +92,8 @@ Read `references/writing-rules.md`. Hard rules in short:
 | W-20 | Standard Indonesian; technical terms stay in their original form |
 | W-21 | No empty vocabulary: pengalaman berharga, luar biasa, etc. |
 | W-22 | No em dash |
-| W-30 | Activities: 3-7 bullets starting with `- `, one concrete sentence each |
+| W-30 | Activities: 3-5 bullets starting with `- `, one sentence each |
+| W-33 | Big outline only: major outcomes, no routine steps (git pull, rename, typo fix, retries) |
 | W-31 | Lessons and struggles: one paragraph each |
 | W-32 | Every part at least 100 characters |
 | W-40 | No tokens, credentials, internal URLs/IPs, personal data |
@@ -125,7 +127,7 @@ Automatic checks:
 | G-2 | No person pronouns |
 | G-3 | No meta tags or notes |
 | G-4 | No em dash |
-| G-5 | Activities: 3-7 lines, all bulleted |
+| G-5 | Activities: 3-5 lines, all bulleted |
 | G-8 | Each activity opens with an active meN- verb, not a di- passive |
 | G-6 | Lessons and struggles: one paragraph, no bullets |
 | G-7 | No empty clichés |

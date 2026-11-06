@@ -108,7 +108,7 @@ After the skill fills the form: **review the three fields → tick the confirmat
 | W-01 | Facts only from evidence or user notes |
 | W-02 | Struggles must be real; none found → the skill asks you |
 | W-10 | No person perspective (saya, aku, kami, kita, penulis, Anda) |
-| W-30 | Activities as 3-7 bullets; lessons and struggles as one paragraph each |
+| W-30 | Activities as 3-5 bullets of major outcomes only; lessons and struggles as one paragraph each |
 | W-32 | Every part at least 100 characters (form validation) |
 | W-50 | Form text is report content only |
 

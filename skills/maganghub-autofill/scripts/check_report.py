@@ -46,8 +46,8 @@ def main() -> int:
 
     lines = [l for l in fields["aktivitas"].splitlines() if l.strip()]
     bullets = [l for l in lines if l.lstrip().startswith("- ")]
-    check(lines and len(bullets) == len(lines) and 3 <= len(lines) <= 7,
-          f"G-5 aktivitas: {len(bullets)}/{len(lines)} lines start with '- ' (need 3-7 lines, all bulleted)")
+    check(lines and len(bullets) == len(lines) and 3 <= len(lines) <= 5,
+          f"G-5 aktivitas: {len(bullets)}/{len(lines)} lines start with '- ' (need 3-5 lines, all bulleted)")
 
     passive = []
     for l in bullets:
