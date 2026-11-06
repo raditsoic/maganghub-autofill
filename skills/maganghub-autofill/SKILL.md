@@ -126,7 +126,7 @@ Read `references/form.md`. In short:
 
 1. **Preflight, do not wait for login.** The skill expects a browser already logged in to Monev. Open `https://monev.maganghub.kemnaker.go.id/dashboard/evaluasi` in the agent's own tab and check the page: logged in shows the tabs Beranda, Riwayat, Perkembangan, Akun. Anything else (login page, redirect to SSO) means not logged in: **stop, do not poll or wait**, show the draft text per field, and tell the user to log in once in that browser and rerun. Never ask for or type credentials.
 2. Go to `https://monev.maganghub.kemnaker.go.id/dashboard` (Beranda) and click **Isi Laporan Hari Ini**. For another date, open `/dashboard/riwayat?date=YYYY-MM-DD&view=edit`.
-3. Fill the three textareas **Uraian aktivitas**, **Pembelajaran yang diperoleh**, **Kendala yang dialami**.
+3. Fill the three textareas **Uraian aktivitas**, **Pembelajaran yang diperoleh**, **Kendala yang dialami**. Open the tab once and never call `browser.open({ url })` again on it: that reloads the SPA and wipes the form. Wait with `waitForSelector("textarea")`, then fill and read back in the same cell (see `references/form.md`).
 4. Read the three values back from the page, compare with the draft, confirm no validation message.
 5. **Stop.** Do not tick the confirmation checkbox. Do not click "Simpan dan Kirim".
 
