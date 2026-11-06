@@ -92,9 +92,12 @@ Quirks and details: [`form.md`](skills/maganghub-autofill/references/form.md).
 ```text
 /maganghub-autofill
 /maganghub-autofill add: meeting with mentor about API design; struggle: slow staging access
+/maganghub-autofill no-ask
 ```
 
 Notes can be in any language; the report is written in Indonesian.
+
+**No-ask mode** (`/maganghub-autofill no-ask`) never asks a question: it decides from the chats and commits alone, fills the form, and lists the decisions it made so you can correct them. With no evidence at all it stops instead of inventing a report. It still never ticks the checkbox or submits.
 
 After the skill fills the form: **review the three fields → tick the confirmation checkbox → Simpan dan Kirim.**
 

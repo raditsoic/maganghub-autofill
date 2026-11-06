@@ -1,6 +1,6 @@
 ---
 name: maganghub-autofill
-description: "Draft and fill the daily report on the MagangHub Monev portal (Kemnaker, Indonesia's government internship program) from today's agent chats, today's git commits, and optional user notes. The report has three parts (activities, lessons learned, struggles) and is written in Indonesian with no first-person perspective. Use when the user runs /maganghub-autofill [notes], or asks to fill in their daily report, logbook, or internship journal. Fills the form in the browser but never ticks the confirmation checkbox or submits."
+description: "Draft and fill the daily report on the MagangHub Monev portal (Kemnaker, Indonesia's government internship program) from today's agent chats, today's git commits, and optional user notes. The report has three parts (activities, lessons learned, struggles) and is written in Indonesian with no first-person perspective. Use when the user runs /maganghub-autofill [notes] or /maganghub-autofill no-ask, or asks to fill in their daily report, logbook, or internship journal. Fills the form in the browser but never ticks the confirmation checkbox or submits. No-ask mode never asks questions."
 license: MIT
 compatibility: Python 3.9+ (standard library only). Filling the form needs a browser tool in the agent (omp browser relay with Brave or Chrome, Playwright, or Chrome MCP) and a logged-in MagangHub Monev account; without one the skill outputs copy-paste text.
 allowed-tools: Read Bash Glob Grep
@@ -16,6 +16,8 @@ Drafts the MagangHub daily report from real work evidence, then fills the form i
 > 2. **Only the user submits.** The skill never ticks the confirmation checkbox and never clicks "Simpan dan Kirim". Submitting also records attendance.
 
 Invocation: `/maganghub-autofill [user notes]`. Without notes, automatic evidence only.
+
+**No-ask mode:** if the arguments contain `no-ask` (or `--no-ask`), run without asking the user anything. See "No-ask mode" below. Any remaining text in the arguments is still used as notes.
 
 ## Requirements
 
@@ -58,6 +60,23 @@ Prompts are truncated at 1500 characters. If a truncation drops important contex
 - Merge prompts and commits that belong to one piece of work into one activity.
 - Facts only from evidence or user notes (W-01). No facts in either → **stop and ask the user** what was done. Never guess.
 - Struggles: look for errors, bugs, reverts, or repeated retries in the evidence. Nothing found and the user did not mention any → ask the user (W-02). Never invent a struggle.
+
+### No-ask mode
+
+No-ask mode removes every question. The user is not available, so decide from evidence alone and disclose the decisions in Step 7.
+
+| Situation | Normal mode | No-ask mode |
+|---|---|---|
+| Only meta-work in the evidence (building or testing this skill) | ask whether it counts | count it as the day's work, because it is the only work on record; write it as ordinary activities |
+| Meta-work next to other real work | drop the meta-work | same: drop the meta-work |
+| No struggle in the evidence | ask | write one honest sentence that no notable technical struggle occurred (see the no-struggle day in `references/examples.md`); never invent an incident |
+| Evidence is thin but non-empty | ask | write fewer bullets (minimum 3 if the evidence supports it, otherwise as many as it supports) and no padding; the 100-character rule is met with real detail from the evidence |
+| No evidence at all (no chats, no commits, no notes) | ask | **stop**: fill nothing, output nothing to the form, and say in one line that there is no evidence. Fabricating is never allowed (W-01) |
+| Delivery Gate fails | fix and rerun | same, silently, until `PASS` |
+| Not logged in to Monev | show the text, ask to log in | same, without asking: show the text per field and state that login is needed |
+| Day already submitted | tell the user | same: do not overwrite, say so |
+
+Everything else (Indonesian output, no person perspective, W-01 to W-50, never tick the checkbox, never submit) is unchanged.
 
 ## Step 3: Write
 
@@ -135,3 +154,5 @@ A day that is already submitted must not be overwritten: tell the user. No brows
 ## Step 7: Report
 
 One or two sentences: the date filled, the Delivery Gate result, and which part the user should double-check. Tell the user the remaining manual steps: review, tick the confirmation checkbox, submit. No long summary.
+
+In no-ask mode, add a short list of the decisions made without asking (for example "counted skill-building as the day's work", "no struggle found, wrote the no-struggle sentence"), so the user can correct them before submitting.
