@@ -2,7 +2,7 @@
 name: maganghub-autofill
 description: "Draft and fill the daily report on the MagangHub Monev portal (Kemnaker, Indonesia's government internship program) from today's agent chats, today's git commits, and optional user notes. The report has three parts (activities, lessons learned, struggles) and is written in Indonesian with no first-person perspective. Use when the user runs /maganghub-autofill [notes] or /maganghub-autofill no-ask, or asks to fill in their daily report, logbook, or internship journal. Fills the form in the browser but never ticks the confirmation checkbox or submits. No-ask mode never asks questions."
 license: MIT
-compatibility: Python 3.9+ (standard library only). Filling the form needs a browser tool in the agent (omp browser relay with Brave or Chrome, Playwright, or Chrome MCP) and a logged-in MagangHub Monev account; without one the skill outputs copy-paste text.
+compatibility: Python 3.9+ (standard library only). Filling the form needs a browser tool in the agent (Claude Code with the Claude in Chrome extension via `claude --chrome`, omp browser relay with Brave or Chrome, Playwright, or Chrome MCP) and a logged-in MagangHub Monev account; without one the skill outputs copy-paste text.
 allowed-tools: Read Bash Glob Grep
 ---
 

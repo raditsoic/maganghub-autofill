@@ -73,6 +73,18 @@ omp plugin install maganghub-autofill@maganghub-autofill
 > [!NOTE]
 > The plugin commands are untested; the manifests follow the marketplace format of a reference project.
 
+### Browser setup (Claude Code)
+
+Claude Code has no built-in browser. Use the **Claude in Chrome** extension (works with Brave too), then log in once at `https://monev.maganghub.kemnaker.go.id/dashboard/evaluasi` in that browser:
+
+1. Install the Claude extension in Brave or Chrome and keep the browser open.
+2. Start Claude Code with `claude --chrome`.
+3. Run the skill. It opens its own tab in a Claude tab group and fills the form there.
+
+Any other browser MCP server (for example Playwright) pointed at a logged-in profile also works in principle but is untested. `references/form.md` is written with omp's `browser.open`/`tab.fill` calls; Claude Code uses the equivalent in-Chrome tools. Without a browser tool the skill prints the three texts for copy-paste.
+
+If Claude Code answers `401 Invalid bearer token` even after `/login`, a stale `ANTHROPIC_AUTH_TOKEN` in the shell overrides it. Unset it.
+
 ### Browser setup (omp with Brave or Chrome)
 
 The fill step drives your already logged-in browser through the omp relay.
@@ -130,7 +142,7 @@ skills/maganghub-autofill/
 
 ## Limits
 
-- Verified once, on 2026-11-06 with omp and Brave through the relay: the form was filled and read back correctly. Submitting was not exercised. The portal can change; `references/form.md` describes the flow as seen on that date.
+- Verified on 2026-11-06 with omp and Brave through the relay, and on 2026-11-11 with Claude Code (`--chrome`, Brave on WSL): the form was filled and read back correctly. Submitting was not exercised. The portal can change; `references/form.md` describes the flow as seen on that date.
 - Chat history is read from `~/.claude/projects` and `~/.omp/agent/sessions`. Other agents are not supported.
 
 ## Releasing
