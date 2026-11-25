@@ -60,7 +60,7 @@ Prompts are truncated at 1500 characters. If a truncation drops important contex
 - Merge prompts and commits that belong to one piece of work into one activity.
 - Keep the big outline only (W-33): 3-5 major outcomes. Drop or fold routine steps such as pulling changes, renaming files, typo fixes, retries, and install commands. Do the same for lessons and struggles: one or two main points.
 - Facts only from evidence or user notes (W-01). No facts in either → **stop and ask the user** what was done. Never guess.
-- Struggles: look for errors, bugs, reverts, or repeated retries in the evidence. Nothing found and the user did not mention any → ask the user (W-02). Never invent a struggle.
+- Struggles (W-02): look for errors, bugs, reverts, or repeated retries in the evidence. If the user did not mention any struggle in their prompt/notes and none is clearly present in the evidence, **STOP before Step 3 (do not output a draft or auto-fill a "no struggle" placeholder)** and ask the user first—either via the agent's interactive question/grill tool if available (e.g., `ask_question` on Antigravity or similar prompts on other platforms) or with a direct question in the conversation (e.g., *"Ada kendala atau error tertentu hari ini, atau berjalan lancar tanpa kendala?"*). Only proceed to draft after the user replies. Never invent a struggle. *(Exception: `no-ask` mode below.)*
 
 ### No-ask mode
 

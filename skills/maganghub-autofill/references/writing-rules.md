@@ -34,7 +34,7 @@ Each rule has an ID (`W-xx`) referenced from `SKILL.md`. Rule explanations are c
 
 - **Pattern:** a generic struggle made up from general context: "sempat kesulitan memahami konsep baru", "keterbatasan waktu".
 - **Why it fails:** an invented struggle looks honest but is false. Mentors read the struggle section to find real blockers.
-- **Rule:** take struggles from errors, bugs, reverts, repeated retries, or hard decisions in the evidence, or from the user's notes. None found → **ask the user**, do not fill. If the user says there were none, write a short honest paragraph that reaches the 100-character minimum without inventing an incident (see the no-struggle day in `examples.md`).
+- **Rule:** take struggles from errors, bugs, reverts, repeated retries, or hard decisions in the evidence, or from the user's notes. If the user did not mention a struggle and none is found in the evidence, **STOP before drafting and ask the user first**—using the platform's interactive question/grill tool if available (e.g., `ask_question` on Antigravity) or a direct question in the conversation. Do not output a draft or pre-fill a "no struggle" placeholder on your own (except in `no-ask` mode). Only after the user confirms there were no struggles, write a short honest paragraph that reaches the 100-character minimum without inventing an incident (see the no-struggle day in `examples.md`).
 - **Before:**
   > Kendala yang dialami berupa kesulitan memahami alur kerja yang kompleks sehingga membutuhkan waktu lebih lama.
 - **After:**
