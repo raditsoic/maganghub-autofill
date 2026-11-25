@@ -14,7 +14,14 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+if len(sys.argv) > 1 and sys.argv[1] in ("-h", "--help"):
+    print(__doc__)
+    sys.exit(0)
 day = sys.argv[1] if len(sys.argv) > 1 else datetime.now().astimezone().strftime("%Y-%m-%d")
+try:
+    datetime.strptime(day, "%Y-%m-%d")
+except ValueError:
+    sys.exit(f"collect_today.py: invalid date {day!r}, expected YYYY-MM-DD")
 root = Path.home() / ".claude" / "projects"
 omp_root = Path.home() / ".omp" / "agent" / "sessions"
 MAX_PROMPT = 1500

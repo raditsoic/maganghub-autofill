@@ -5,6 +5,13 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); version
 
 ## [Unreleased]
 
+### Added
+- Plugin icon at `.claude-plugin/icon.png`.
+- Claude Code form fill via Claude in Chrome (`claude --chrome`), verified in Brave on 2026-11-11; setup and tab-group notes in the README and `references/form.md`.
+
+### Fixed
+- `collect_today.py` handles `--help` and rejects invalid dates instead of treating them as a date.
+
 ## [0.1.0] - 2026-11-06
 
 ### Added

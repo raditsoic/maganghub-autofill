@@ -50,4 +50,12 @@ Use the session's browser tool. Ids such as `input-v-7` are generated; select te
 - Do navigation, `waitForSelector`, fill, and read-back in one cell, then do nothing else to that page until the user has reviewed it. A filled form that is not touched stayed stable for 9 seconds of sampling.
 - Avoid pasting page text that contains personal data (bank account, email) into chat. Read only what the task needs.
 
+## Claude Code notes (Claude in Chrome)
+
+- Start with `claude --chrome`. Tools are `mcp__claude-in-chrome__*` (`tabs_create_mcp`, `navigate`, `find`, `form_input`, `get_page_text`, `read_page`). Check the connection with `list_connected_browsers`.
+- A session only sees tabs in its own group. It cannot list or reuse the user's other tabs or a previous session's tab. Create a new tab with `tabs_create_mcp` and work only in it; the session may also start with a pre-existing "New Tab" that is not yours, so check the tab ID before navigating and never close tabs you did not create.
+- Open the dated URL `https://monev.maganghub.kemnaker.go.id/dashboard/riwayat?date=YYYY-MM-DD&view=edit` directly; it loads without a redirect when logged in (verified 2026-11-11). The `/dashboard/evaluasi` page has no textareas.
+- Page JavaScript may be blocked, so rely on `find` + `form_input` and screenshots or `get_page_text` for the read-back. Confirm the three values and that "Minimal 100 karakter" is gone for texts of 100 or more characters.
+- Same rules apply: no checkbox, no **Simpan dan Kirim**, no reload of a filled tab.
+
 If the layout differs from this description: follow the visible labels and tell the user what differs. If there is no browser tool: show the final text per field for copying.
