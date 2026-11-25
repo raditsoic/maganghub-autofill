@@ -5,7 +5,7 @@ Each rule has an ID (`W-xx`) referenced from `SKILL.md`. Rule explanations are c
 | Group | Rules |
 |---|---|
 | Facts | W-01 facts only from evidence, W-02 real struggles only, W-03 lessons follow activities |
-| Perspective | W-10 natural first-person "saya", W-11 active phrasing (no stiff `di-` passives) |
+| Perspective | W-10 no person perspective (natural impersonal), W-11 active phrasing (no stiff `di-` passives) |
 | Language | W-20 natural semi-formal Indonesian & familiar tech terms, W-21 empty vocabulary, W-22 em dash and theatrical openers, W-23 hyperbole, W-24 humanized technical explanations |
 | Structure | W-30 activity bullets, W-31 one paragraph, W-32 100 characters, W-33 outline level only |
 | Safety | W-40 no secrets |
@@ -15,7 +15,7 @@ Each rule has an ID (`W-xx`) referenced from `SKILL.md`. Rule explanations are c
 > **Never invent facts** (W-01). A rewrite adds no activity, tool, number, person, or incident that is not in the evidence or the user's notes. If detail is missing, ask the user or write a shorter honest version.
 
 > [!TIP]
-> **Write like a real intern updating their mentor.** Keep it clear, honest, and easy to read. Use real feature, module, tool, and outcome names from the evidence, without sounding like a textbook translation or a raw git log.
+> **Keep it impersonal, not robotic.** Avoiding "saya" does not mean writing like a legal document. Use real feature, module, tool, and outcome names from the evidence, written in clear, flowing Indonesian that a mentor can read effortlessly.
 
 ## Facts
 
@@ -36,31 +36,33 @@ Each rule has an ID (`W-xx`) referenced from `SKILL.md`. Rule explanations are c
 - **Why it fails:** an invented struggle looks honest but is false. Mentors read the struggle section to find real blockers.
 - **Rule:** take struggles from errors, bugs, reverts, repeated retries, or hard decisions in the evidence, or from the user's notes. None found → **ask the user**, do not fill. If the user says there were none, write a short honest paragraph that reaches the 100-character minimum without inventing an incident (see the no-struggle day in `examples.md`).
 - **Before:**
-  > Kendala yang saya alami berupa kesulitan memahami alur kerja yang kompleks sehingga membutuhkan waktu lebih lama.
+  > Kendala yang dialami berupa kesulitan memahami alur kerja yang kompleks sehingga membutuhkan waktu lebih lama.
 - **After:**
-  > Sempat muncul kendala ketika sistem menolak token login yang sebenarnya masih valid. Setelah saya telusuri lewat log, penyebabnya ternyata urutan middleware yang tertukar, dan masalah selesai setelah urutannya diperbaiki.
+  > Sempat muncul kendala ketika sistem menolak token login yang sebenarnya masih valid. Setelah ditelusuri lewat log, penyebabnya ternyata urutan middleware yang tertukar, dan masalah selesai setelah urutannya diperbaiki.
 
 ### W-03 Lessons follow activities
 
 - **Pattern:** a lesson about something not done that day, or a claim that was not tested.
 - **Why it fails:** every lesson must trace back to an activity above it.
 - **Before:**
-  > Hari ini saya jadi lebih paham tentang arsitektur microservice dan Kubernetes.
+  > Dari pengerjaan hari ini, terlihat pentingnya arsitektur microservice dan Kubernetes.
   > (the day's work was form validation only)
 - **After:**
-  > Dari pengerjaan validasi form hari ini, saya jadi lebih paham pentingnya mengecek input di sisi frontend sekaligus backend. Pesan error yang jelas untuk tiap aturan validasi juga sangat membantu pengguna tahu bagian mana yang perlu diperbaiki.
+  > Dari pengerjaan validasi form hari ini, terlihat pentingnya mengecek input di sisi frontend sekaligus backend. Pesan error yang jelas untuk tiap aturan validasi juga sangat membantu pengguna tahu bagian mana yang perlu diperbaiki.
 
 ## Perspective
 
-### W-10 Natural first-person "saya"
+### W-10 No person perspective (natural impersonal)
 
-- **Pattern:** stiff impersonal phrasing that avoids any actor (*"Pemahaman tentang X bertambah"*, *"Penentuan Y belum menemukan keputusan akhir"*), or informal/wrong pronouns (*"aku"*, *"gue"*, *"gua"*, *"gw"*, *"lo"*, *"lu"*, *"penulis"*, *"Anda"*).
-- **Why it fails:** avoiding `"saya"` altogether produces robotic, bureaucratic Indonesian; on the other hand, slang pronouns or `"penulis"` feel out of place in an internship report.
-- **Technique:** use `"saya"` naturally—especially in lessons learned and struggles—so the report reads like a real person explaining their day. In activity bullets, you can open directly with an active verb (`Membangun ...`, `Berdiskusi ...`) or use `"Saya ..."` where it flows naturally, without repeating `"Saya ..."` mechanically at the start of every single bullet.
+- **Pattern:** `"saya"`, `"aku"`, `"kami"`, `"kita"`, `"penulis"`, `"gue"`, `"gua"`, `"gw"`, `"lo"`, `"lu"`, `"Anda"`, or the suffix `"-ku"`.
+- **Why it fails:** the report must stay impersonal with no first- or second-person pronouns.
+- **Technique:** keep it natural without falling into stiff nominalizations (*"Pemahaman tentang X bertambah"*, *"Penentuan Y belum menemukan keputusan akhir"*).
+  - In **activities**, open directly with an active verb (`Membangun ...`, `Memperbaiki ...`, `Berdiskusi ...`).
+  - In **lessons and struggles**, focus on what happened or what became clear: *"Dari pengerjaan hari ini, terlihat bahwa..."*, *"Ternyata..."*, *"Sempat muncul kendala ketika..."*, *"Tidak ada kendala teknis yang berarti hari ini..."*.
 - **Before:**
-  > Pemahaman tentang alur login bertambah. Penentuan struktur data belum menemukan keputusan akhir.
+  > Hari ini saya membuat endpoint login dan saya menulis tes untuknya.
 - **After:**
-  > Dari pengerjaan hari ini, saya jadi lebih paham bagaimana alur autentikasi bekerja dari awal sampai akhir. Untuk struktur datanya sendiri, saya dan mentor masih mempertimbangkan beberapa opsi sebelum memutuskan yang paling cocok.
+  > Membangun endpoint login di sisi backend lengkap dengan unit test untuk mengecek respons sukses dan gagal.
 
 ### W-11 Active phrasing, not stiff `di-` passives
 
@@ -87,9 +89,9 @@ Each rule has an ID (`W-xx`) referenced from `SKILL.md`. Rule explanations are c
 - **Pattern:** `"luar biasa"`, `"sangat bermanfaat"`, `"pengalaman berharga"`, `"di era digital"`, `"membuka wawasan"`, `"sebuah perjalanan"`.
 - **Why it fails:** reads as filler and carries no real information.
 - **Before:**
-  > Kegiatan ini memberikan pengalaman berharga yang sangat bermanfaat dan membuka wawasan saya tentang dunia kerja.
+  > Kegiatan ini memberikan pengalaman berharga yang sangat bermanfaat dan membuka wawasan tentang dunia kerja.
 - **After:**
-  > Lewat sesi code review bersama mentor, saya jadi tahu standar penamaan dan struktur folder yang biasa dipakai tim agar kode lebih mudah dibaca orang lain.
+  > Lewat sesi code review bersama mentor, standar penamaan dan struktur folder yang biasa dipakai tim jadi jauh lebih jelas sehingga kode lebih mudah dibaca orang lain.
 
 ### W-22 Em dash and theatrical openers
 
@@ -110,7 +112,7 @@ Each rule has an ID (`W-xx`) referenced from `SKILL.md`. Rule explanations are c
 
 - **Pattern:** menumpuk istilah teknis mentah tanpa konteks fungsi (*"Mengimplementasikan middleware pembaca header untuk validasi token akses pada endpoint HTTP"*), atau memakai struktur terjemahan kaku dari bahasa Inggris (*"terbukti memengaruhi"*, *"menemukan keputusan akhir"*, *"pada lingkungan bersih"*).
 - **Why it fails:** walaupun pembaca paham teknis, kalimat yang terlalu kering dan penuh jargon seperti catatan mesin terasa melelahkan dan tidak alami.
-- **Rule:** istilah teknis tetap boleh dipakai, tetapi **jelaskan dalam bahasa manusia yang mengalir**—kaitkan dengan fitur, tujuan, atau dampak yang dirasakan pengguna/sistem. Hindari gaya terjemahan literal dan nominalisasi berlebih (`Pemahaman tentang ... bertambah`, `Pelaksanaan ... berjalan`).
+- **Rule:** istilah teknis tetap boleh dipakai, tetapi **jelaskan dalam bahasa manusia yang mengalir**, kaitkan dengan fitur, tujuan, atau dampak yang dirasakan pengguna/sistem. Hindari gaya terjemahan literal dan nominalisasi berlebih (`Pemahaman tentang ... bertambah`, `Pelaksanaan ... berjalan`).
 - **Before:**
   > - Memperbaiki urutan middleware yang menyebabkan token valid ditolak.
   >
@@ -118,7 +120,7 @@ Each rule has an ID (`W-xx`) referenced from `SKILL.md`. Rule explanations are c
 - **After:**
   > - Memperbaiki bug di alur login yang sempat menolak token valid karena urutan pengecekan middleware tertukar.
   >
-  > Dari masalah hari ini, saya jadi sadar bahwa urutan middleware di backend sangat krusial, karena kalau urutannya salah, pengecekan autentikasi bisa langsung menolak akses meskipun data login pengguna sudah benar.
+  > Dari masalah hari ini, terlihat jelas bahwa urutan middleware di backend sangat krusial, karena kalau urutannya salah, pengecekan autentikasi bisa langsung menolak akses meskipun data login pengguna sudah benar.
 
 ## Structure
 

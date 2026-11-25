@@ -1,6 +1,6 @@
 ---
 name: maganghub-autofill
-description: "Draft and fill the daily report on the MagangHub Monev portal (Kemnaker, Indonesia's government internship program) from today's agent chats, today's git commits, and optional user notes. The report has three parts (activities, lessons learned, struggles) and is written in natural, humanized Indonesian using first-person perspective ('saya'). Use when the user runs /maganghub-autofill [notes] or /maganghub-autofill no-ask, or asks to fill in their daily report, logbook, or internship journal. Fills the form in the browser but never ticks the confirmation checkbox or submits. No-ask mode never asks questions."
+description: "Draft and fill the daily report on the MagangHub Monev portal (Kemnaker, Indonesia's government internship program) from today's agent chats, today's git commits, and optional user notes. The report has three parts (activities, lessons learned, struggles) and is written in natural, humanized Indonesian with no first-person perspective. Use when the user runs /maganghub-autofill [notes] or /maganghub-autofill no-ask, or asks to fill in their daily report, logbook, or internship journal. Fills the form in the browser but never ticks the confirmation checkbox or submits. No-ask mode never asks questions."
 license: MIT
 compatibility: Python 3.9+ (standard library only). Filling the form needs a browser tool in the agent (omp browser relay with Brave or Chrome, Playwright, or Chrome MCP) and a logged-in MagangHub Monev account; without one the skill outputs copy-paste text.
 allowed-tools: Read Bash Glob Grep
@@ -77,7 +77,7 @@ No-ask mode removes every question. The user is not available, so decide from ev
 | Not logged in to Monev | show the text, ask to log in | same, without asking: show the text per field and state that login is needed |
 | Day already submitted | tell the user | same: do not overwrite, say so |
 
-Everything else (natural Indonesian output, W-01 to W-50, never tick the checkbox, never submit) is unchanged.
+Everything else (natural Indonesian output, no person perspective, W-01 to W-50, never tick the checkbox, never submit) is unchanged.
 
 ## Step 3: Write
 
@@ -87,7 +87,7 @@ Read `references/writing-rules.md`. Hard rules in short:
 |---|---|
 | W-01 | Facts only from evidence or user notes |
 | W-02 | Struggles must be real; none found → ask |
-| W-10 | Natural first-person "saya"; no slang/wrong pronouns (`aku`, `gue`, `gw`, `lo`, `penulis`, `Anda`) |
+| W-10 | No person perspective: not `saya`, `aku`, `kami`, `kita`, `penulis`, `gue`, `gw`, `lo`, `Anda` |
 | W-11 | Active phrasing in activities (no stiff `di-` passives; vary openings) |
 | W-20 | Natural semi-formal Indonesian; keep familiar tech terms, avoid stiff textbook translations (`galat`, `basis data`, `kedaluwarsa`) |
 | W-21 | No empty vocabulary: pengalaman berharga, luar biasa, etc. |
@@ -125,7 +125,7 @@ Automatic checks:
 | Check | Content |
 |---|---|
 | G-1 | Every part at least 100 characters |
-| G-2 | No informal/wrong pronouns (`aku`, `gue`, `gw`, `lo`, `penulis`) |
+| G-2 | No person pronouns (`saya`, `aku`, `kami`, `kita`, `penulis`, `gue`, `gw`, `lo`) |
 | G-3 | No meta tags or notes |
 | G-4 | No em dash |
 | G-5 | Activities: 3-5 lines, all bulleted |

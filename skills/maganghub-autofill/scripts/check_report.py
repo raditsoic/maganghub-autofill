@@ -11,7 +11,7 @@ import re
 import sys
 
 MIN_CHARS = 100
-INFORMAL_PRONOUNS = re.compile(r"\b(aku|gue|gua|gw|lo|lu|penulis)\b", re.I)
+FIRST_PERSON = re.compile(r"\b(saya|aku|kami|kita|penulis|gue|gua|gw|lo|lu)\b", re.I)
 META = re.compile(r"\[INFERENCE|\bcatatan\s*:|\bperlu konfirmasi\b|\banda\b|\bsilakan\b|\bsemoga\b", re.I)
 EM_DASH = re.compile(r"—|\s--\s")
 CLICHES = [
@@ -37,8 +37,8 @@ def main() -> int:
         check(len(text) >= MIN_CHARS, f"G-1 {name}: {len(text)} chars (min {MIN_CHARS})")
 
     joined = "\n".join(fields.values())
-    m = INFORMAL_PRONOUNS.search(joined)
-    check(not m, "G-2 no informal/wrong pronouns" + (f": found '{m.group(0)}'" if m else ""))
+    m = FIRST_PERSON.search(joined)
+    check(not m, "G-2 no person pronouns" + (f": found '{m.group(0)}'" if m else ""))
     m = META.search(joined)
     check(not m, "G-3 no meta tags/notes" + (f": found '{m.group(0)}'" if m else ""))
     m = EM_DASH.search(joined)
