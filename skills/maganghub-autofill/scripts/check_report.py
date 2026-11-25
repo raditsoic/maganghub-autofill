@@ -11,7 +11,7 @@ import re
 import sys
 
 MIN_CHARS = 100
-FIRST_PERSON = re.compile(r"\b(saya|aku|kami|kita|penulis|gue|gua|gw)\b", re.I)
+INFORMAL_PRONOUNS = re.compile(r"\b(aku|gue|gua|gw|lo|lu|penulis)\b", re.I)
 META = re.compile(r"\[INFERENCE|\bcatatan\s*:|\bperlu konfirmasi\b|\banda\b|\bsilakan\b|\bsemoga\b", re.I)
 EM_DASH = re.compile(r"—|\s--\s")
 CLICHES = [
@@ -37,8 +37,8 @@ def main() -> int:
         check(len(text) >= MIN_CHARS, f"G-1 {name}: {len(text)} chars (min {MIN_CHARS})")
 
     joined = "\n".join(fields.values())
-    m = FIRST_PERSON.search(joined)
-    check(not m, "G-2 no person pronouns" + (f": found '{m.group(0)}'" if m else ""))
+    m = INFORMAL_PRONOUNS.search(joined)
+    check(not m, "G-2 no informal/wrong pronouns" + (f": found '{m.group(0)}'" if m else ""))
     m = META.search(joined)
     check(not m, "G-3 no meta tags/notes" + (f": found '{m.group(0)}'" if m else ""))
     m = EM_DASH.search(joined)
@@ -54,7 +54,7 @@ def main() -> int:
         word = re.sub(r"^[-\s]+", "", l).split(" ")[0].lower()
         if re.fullmatch(r"di[a-z]{3,}", word) and word not in DI_NOT_PASSIVE:
             passive.append(word)
-    check(not passive, "G-8 activities open with active meN- verbs" + (f": passive found {', '.join(passive)}" if passive else ""))
+    check(not passive, "G-8 activities use active phrasing (no di- passive)" + (f": passive found {', '.join(passive)}" if passive else ""))
 
     for name in ("pelajaran", "kendala"):
         t = fields[name]

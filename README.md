@@ -4,7 +4,7 @@
 
 **Your MagangHub daily report, drafted from real work. You submit it.**
 
-An agent skill for [MagangHub Monev](https://monev.maganghub.kemnaker.go.id) (Kemnaker, Indonesia's government internship program). It reads today's agent chats and git commits, writes the three report parts in Indonesian with no first-person perspective, then fills them into the form in your browser.
+An agent skill for [MagangHub Monev](https://monev.maganghub.kemnaker.go.id) (Kemnaker, Indonesia's government internship program). It reads today's agent chats and git commits, writes the three report parts in natural, humanized Indonesian (using "saya"), then fills them into the form in your browser.
 
 [Before and after](#before-and-after) · [How it works](#how-it-works) · [Install](#install) · [Usage](#usage) · [Rules](#rules) · [Limits](#limits)
 
@@ -25,7 +25,7 @@ Evidence: 3 commits and one prompt about a rejected token.
 
 | Before (no skill) | After |
 |:--|:--|
-| Hari ini saya sangat senang bisa belajar banyak hal baru yang luar biasa. Saya membuat fitur dengan sempurna dan semua berjalan lancar. Semoga hari esok lebih baik! | **Uraian aktivitas** <br>- Membuat endpoint login berbasis JWT. <br>- Menulis tes unit untuk validasi token. <br>- Memperbaiki urutan middleware yang menolak token valid. |
+| Hari ini aku sangat senang bisa belajar banyak hal baru yang luar biasa. Aku membuat fitur dengan sempurna dan semua berjalan lancar. Semoga hari esok lebih baik! | **Uraian aktivitas** <br>- Membangun endpoint login berbasis JWT di sisi backend untuk menangani autentikasi pengguna. <br>- Menambahkan unit test untuk memastikan token valid diterima dan token expired ditolak. <br>- Memperbaiki bug di alur login yang sempat menolak token valid karena urutan middleware tertukar. |
 
 More in [`examples.md`](skills/maganghub-autofill/references/examples.md).
 
@@ -34,7 +34,7 @@ More in [`examples.md`](skills/maganghub-autofill/references/examples.md).
 ```mermaid
 flowchart LR
     A[collect_today.py<br/>chats + git commits] --> B[merge with<br/>user notes]
-    B --> C[write 3 parts<br/>Indonesian, no pronouns]
+    B --> C[write 3 parts<br/>natural Indonesian]
     C --> D{check_report.py<br/>Delivery Gate}
     D -- FAIL --> C
     D -- PASS --> E[fill form<br/>in your browser]
@@ -44,8 +44,8 @@ flowchart LR
 | Part | What it does |
 |---|---|
 | **Real evidence** | `collect_today.py` gathers Claude Code and omp chat prompts plus git commits for one date |
-| **Writing rules** | 14 ID'd rules (`W-xx`): no fabrication, no "saya/kami", no empty vocabulary, no em dash |
-| **Delivery Gate** | `check_report.py` checks 100 characters per part, pronouns, meta tags, em dash, bullet and paragraph shape |
+| **Writing rules** | 15 ID'd rules (`W-xx`): no fabrication, natural first-person "saya", humanized tech explanations, no empty vocabulary, no em dash |
+| **Delivery Gate** | `check_report.py` checks 100 characters per part, informal pronouns, meta tags, em dash, bullet and paragraph shape |
 | **Form fill** | Through the agent's browser tool, on the Monev portal. Login and submit stay with you |
 
 ## Install
@@ -107,12 +107,13 @@ After the skill fills the form: **review the three fields → tick the confirmat
 |---|---|
 | W-01 | Facts only from evidence or user notes |
 | W-02 | Struggles must be real; none found → the skill asks you |
-| W-10 | No person perspective (saya, aku, kami, kita, penulis, Anda) |
+| W-10 | Natural first-person "saya"; no slang/wrong pronouns (`aku`, `gue`, `gw`, `lo`, `penulis`, `Anda`) |
+| W-24 | Humanized technical explanations — clear context, not a raw git log or stiff textbook translation |
 | W-30 | Activities as 3-5 bullets of major outcomes only; lessons and struggles as one paragraph each |
 | W-32 | Every part at least 100 characters (form validation) |
 | W-50 | Form text is report content only |
 
-All 14 rules with before/after samples: [`writing-rules.md`](skills/maganghub-autofill/references/writing-rules.md).
+All 15 rules with before/after samples: [`writing-rules.md`](skills/maganghub-autofill/references/writing-rules.md).
 
 ## Layout
 
