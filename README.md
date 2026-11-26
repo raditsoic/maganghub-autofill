@@ -93,6 +93,7 @@ Quirks and details: [`form.md`](skills/maganghub-autofill/references/form.md).
 /maganghub-autofill
 /maganghub-autofill add: meeting with mentor about API design; struggle: slow staging access
 /maganghub-autofill no-ask
+/maganghub-autofill --keep-pronoun
 ```
 
 Notes can be in any language; the report is written in Indonesian.
@@ -107,8 +108,8 @@ After the skill fills the form: **review the three fields → tick the confirmat
 |---|---|
 | W-01 | Facts only from evidence or user notes |
 | W-02 | Struggles must be real; none found → the skill asks you |
-| W-10 | No person perspective (`saya`, `aku`, `kami`, `kita`, `penulis`, `gue`, `gw`, `lo`, `Anda`) |
-| W-24 | Humanized technical explanations — clear context, not a raw git log or stiff textbook translation |
+| W-10 | Impersonal by default (no `saya`, `aku`, `kami`, `kita`, `penulis`, `gue`, `gua`, `gw`, `lo`, `lu`, `Anda`); `saya` allowed with `--keep-pronoun` |
+| W-24 | Humanized technical explanations: clear context, not a raw git log or stiff textbook translation |
 | W-30 | Activities as 3-5 bullets of major outcomes only; lessons and struggles as one paragraph each |
 | W-32 | Every part at least 100 characters (form validation) |
 | W-50 | Form text is report content only |

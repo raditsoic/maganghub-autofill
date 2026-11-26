@@ -1,11 +1,11 @@
 # Writing rules for the daily report
 
-Each rule has an ID (`W-xx`) referenced from `SKILL.md`. Rule explanations are concise; every **Before** and **After** sample is written in natural Indonesian because the report itself is written in Indonesian. Pattern format: **Pattern**, **Why it fails**, **Before**, **After**.
+Each rule has an ID (`W-xx`) referenced from `SKILL.md`. Rule explanations are in English; every **Before** and **After** sample is Indonesian because the report itself is written in Indonesian. Pattern format: **Pattern**, **Why it fails**, **Before**, **After**.
 
 | Group | Rules |
 |---|---|
 | Facts | W-01 facts only from evidence, W-02 real struggles only, W-03 lessons follow activities |
-| Perspective | W-10 no person perspective (natural impersonal), W-11 active phrasing (no stiff `di-` passives) |
+| Perspective | W-10 impersonal by default (`saya` allowed with `--keep-pronoun`), W-11 active phrasing (no stiff `di-` passives) |
 | Language | W-20 natural semi-formal Indonesian & familiar tech terms, W-21 empty vocabulary, W-22 em dash and theatrical openers, W-23 hyperbole, W-24 humanized technical explanations |
 | Structure | W-30 activity bullets, W-31 one paragraph, W-32 100 characters, W-33 outline level only |
 | Safety | W-40 no secrets |
@@ -34,7 +34,7 @@ Each rule has an ID (`W-xx`) referenced from `SKILL.md`. Rule explanations are c
 
 - **Pattern:** a generic struggle made up from general context: "sempat kesulitan memahami konsep baru", "keterbatasan waktu".
 - **Why it fails:** an invented struggle looks honest but is false. Mentors read the struggle section to find real blockers.
-- **Rule:** take struggles from errors, bugs, reverts, repeated retries, or hard decisions in the evidence, or from the user's notes. If the user did not mention a struggle and none is found in the evidence, **STOP before drafting and ask the user first**—using the platform's interactive question/grill tool if available (e.g., `ask_question` on Antigravity) or a direct question in the conversation. Do not output a draft or pre-fill a "no struggle" placeholder on your own (except in `no-ask` mode). Only after the user confirms there were no struggles, write a short honest paragraph that reaches the 100-character minimum without inventing an incident (see the no-struggle day in `examples.md`).
+- **Rule:** take struggles from errors, bugs, reverts, repeated retries, or hard decisions in the evidence, or from the user's notes. If the user did not mention a struggle and none is found in the evidence, **STOP before drafting** and ask the user first, using the agent's question tool if it has one, otherwise a direct question in chat. Do not output a draft or pre-fill a "no struggle" placeholder on your own (except in `no-ask` mode). Only after the user confirms there were no struggles, write a short honest paragraph that reaches the 100-character minimum without inventing an incident (see the no-struggle day in `examples.md`).
 - **Before:**
   > Kendala yang dialami berupa kesulitan memahami alur kerja yang kompleks sehingga membutuhkan waktu lebih lama.
 - **After:**
@@ -52,11 +52,12 @@ Each rule has an ID (`W-xx`) referenced from `SKILL.md`. Rule explanations are c
 
 ## Perspective
 
-### W-10 No person perspective (natural impersonal)
+### W-10 Impersonal by default (`saya` allowed with `--keep-pronoun`)
 
-- **Pattern:** `"saya"`, `"aku"`, `"kami"`, `"kita"`, `"penulis"`, `"gue"`, `"gua"`, `"gw"`, `"lo"`, `"lu"`, `"Anda"`, or the suffix `"-ku"`.
-- **Why it fails:** the report must stay impersonal with no first- or second-person pronouns.
-- **Technique:** keep it natural without falling into stiff nominalizations (*"Pemahaman tentang X bertambah"*, *"Penentuan Y belum menemukan keputusan akhir"*).
+- **Pattern:** `saya`, `aku`, `kami`, `kita`, `penulis`, `gue`, `gua`, `gw`, `lo`, `lu`, `Anda`.
+- **Why it fails:** by default, the report stays impersonal with no first- or second-person pronouns.
+- **Opt-in mode (`--keep-pronoun`):** when the user passes `keep-pronoun` or `--keep-pronoun`, first-person `saya` is allowed (and only `saya`; informal/other pronouns like `aku`, `kami`, `kita`, `penulis`, `gue`, `gua`, `gw`, `lo`, `lu`, `Anda` remain disallowed). See the keep-pronoun sample in `examples.md`.
+- **Technique (default impersonal):** keep it natural without falling into stiff nominalizations (*"Pemahaman tentang X bertambah"*, *"Penentuan Y belum menemukan keputusan akhir"*).
   - In **activities**, open directly with an active verb (`Membangun ...`, `Memperbaiki ...`, `Berdiskusi ...`).
   - In **lessons and struggles**, focus on what happened or what became clear: *"Dari pengerjaan hari ini, terlihat bahwa..."*, *"Ternyata..."*, *"Sempat muncul kendala ketika..."*, *"Tidak ada kendala teknis yang berarti hari ini..."*.
 - **Before:**
@@ -75,14 +76,14 @@ Each rule has an ID (`W-xx`) referenced from `SKILL.md`. Rule explanations are c
 - **After:**
   > - Membuat fitur ekspor laporan ke format CSV agar data bisa langsung diunduh.
   > - Menguji fitur ekspor dengan 3 contoh data sekaligus memperbaiki format tanggal yang sempat keliru.
-- **Scope:** applies to the opening verb of every activity bullet. Any natural active verb works (`Membuat`, `Membangun`, `Memperbaiki`, `Berdiskusi`, `Mempelajari`, `Mencoba`, `Melanjutkan`)—vary them so the list does not feel repetitive. Inside lessons and struggles, passive clauses are fine when natural.
+- **Scope:** applies to the opening verb of every activity bullet. Any natural active verb works (`Membuat`, `Membangun`, `Memperbaiki`, `Berdiskusi`, `Mempelajari`, `Mencoba`, `Melanjutkan`). Vary them so the list does not feel repetitive. Inside lessons and struggles, passive clauses are fine when natural.
 
 ## Language
 
 ### W-20 Natural semi-formal Indonesian, familiar tech terms
 
 - **Pattern:** mixing chat slang (`gue/lo`, `bgt`, `yg`, `dgn`), OR forcing stiff textbook/KBBI translations for everyday tech terms (`galat` for error, `basis data` for database, `kedaluwarsa` for expired, `sah` for valid, `variabel lingkungan` for env/environment variable, `lingkungan bersih` for clean environment, `peninjauan kode` for code review, `kait` for hook).
-- **Rule:** gunakan bahasa Indonesia semi-formal yang luwes dan sopan, seperti saat melaporkan progres ke mentor. Biarkan istilah teknis yang memang lazim dipakai sehari-hari tetap dalam bentuk aslinya (`error`, `bug`, `database`, `backend`, `API`, `login`, `expired`, `valid`, `env`, `code review`, `deploy`, `unit test`).
+- **Rule:** write in natural, polite semi-formal Indonesian, as if giving a progress update to a mentor. Keep everyday technical terms in their familiar form (`error`, `bug`, `database`, `backend`, `API`, `login`, `expired`, `valid`, `env`, `code review`, `deploy`, `unit test`).
 
 ### W-21 Empty vocabulary
 
@@ -96,12 +97,12 @@ Each rule has an ID (`W-xx`) referenced from `SKILL.md`. Rule explanations are c
 ### W-22 Em dash and theatrical openers
 
 - **Pattern:** `—`, ` -- `, `"Pada dasarnya"`, `"Intinya"`, `"Hari ini adalah hari yang penuh tantangan"`.
-- **Rule:** ganti em dash dengan koma atau titik. Hapus kalimat pembuka yang dramatis dan tidak menambah fakta.
+- **Rule:** replace an em dash with a comma or period. Delete dramatic openers that add no fact.
 
 ### W-23 Hyperbole and unevidenced results
 
 - **Pattern:** `"berhasil sempurna"`, `"seluruh bug teratasi"`, `"performa meningkat drastis"`.
-- **Rule:** tulis hasil yang wajar dan sesuai bukti. Hanya cantumkan angka kalau angka tersebut memang ada di evidence atau catatan pengguna.
+- **Rule:** write grounded results that match the evidence. Only include numbers when they appear in the evidence or user notes.
 - **Before:**
   > Performa query meningkat drastis dan semua berjalan sempurna.
 - **After:**
@@ -110,9 +111,9 @@ Each rule has an ID (`W-xx`) referenced from `SKILL.md`. Rule explanations are c
 
 ### W-24 Humanized technical explanations (not a raw git log)
 
-- **Pattern:** menumpuk istilah teknis mentah tanpa konteks fungsi (*"Mengimplementasikan middleware pembaca header untuk validasi token akses pada endpoint HTTP"*), atau memakai struktur terjemahan kaku dari bahasa Inggris (*"terbukti memengaruhi"*, *"menemukan keputusan akhir"*, *"pada lingkungan bersih"*).
-- **Why it fails:** walaupun pembaca paham teknis, kalimat yang terlalu kering dan penuh jargon seperti catatan mesin terasa melelahkan dan tidak alami.
-- **Rule:** istilah teknis tetap boleh dipakai, tetapi **jelaskan dalam bahasa manusia yang mengalir**, kaitkan dengan fitur, tujuan, atau dampak yang dirasakan pengguna/sistem. Hindari gaya terjemahan literal dan nominalisasi berlebih (`Pemahaman tentang ... bertambah`, `Pelaksanaan ... berjalan`).
+- **Pattern:** stacking raw implementation jargon without functional context (*"Mengimplementasikan middleware pembaca header untuk validasi token akses pada endpoint HTTP"*), or using literal English-to-Indonesian calques (*"terbukti memengaruhi"*, *"menemukan keputusan akhir"*, *"pada lingkungan bersih"*).
+- **Why it fails:** even when the reader understands technical concepts, dry jargon dumps read like machine output rather than a human report.
+- **Rule:** technical terms are welcome, but explain them in clear, flowing language tied to the feature, purpose, or impact on users and the system. Avoid literal translations and heavy nominalizations (`Pemahaman tentang ... bertambah`, `Pelaksanaan ... berjalan`).
 - **Before:**
   > - Memperbaiki urutan middleware yang menyebabkan token valid ditolak.
   >

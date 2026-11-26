@@ -68,6 +68,27 @@ Saat diskusi tadi, belum ada keputusan final soal cara terbaik menyimpan riwayat
 
 This struggle is valid only if it really appears in the evidence or the user's notes.
 
+## Keep-pronoun mode (`--keep-pronoun`)
+
+Evidence: same as the first example (3 commits: `feat: endpoint login JWT`, `test: validasi token`, `fix: urutan middleware`), invoked with `/maganghub-autofill --keep-pronoun`. Uses `saya` only.
+
+**Uraian aktivitas**
+```
+- Membangun endpoint login berbasis JWT di sisi backend untuk menangani proses autentikasi pengguna.
+- Menambahkan unit test untuk memastikan token yang valid bisa diterima dan token yang sudah expired langsung ditolak.
+- Memperbaiki bug di alur login yang sempat menolak token valid karena urutan middleware tertukar.
+```
+
+**Pembelajaran yang diperoleh**
+```
+Dari pengerjaan fitur login hari ini, saya jadi lebih paham bagaimana alur token JWT bekerja, termasuk pentingnya menguji kasus token expired secara terpisah agar error lebih mudah terdeteksi sejak awal. Saya juga belajar bahwa urutan middleware di backend sangat berpengaruh karena posisi yang keliru bisa membuat request yang valid langsung ditolak.
+```
+
+**Kendala yang dialami**
+```
+Saya sempat mengalami kendala ketika sistem menolak token yang sebenarnya masih valid saat pengujian login. Setelah saya telusuri lewat log request, penyebabnya ternyata middleware autentikasi jalan lebih dulu sebelum middleware yang membaca header, dan masalah selesai setelah urutannya saya tukar.
+```
+
 ## Bad example (do not imitate)
 
 ```

@@ -19,6 +19,8 @@ Invocation: `/maganghub-autofill [user notes]`. Without notes, automatic evidenc
 
 **No-ask mode:** if the arguments contain `no-ask` (or `--no-ask`), run without asking the user anything. See "No-ask mode" below. Any remaining text in the arguments is still used as notes.
 
+**Keep-pronoun mode:** if the arguments contain `keep-pronoun` (or `--keep-pronoun`), allow first-person `saya` in the report (only `saya`; other pronouns such as `aku`, `kami`, `kita`, `penulis`, `gue`, `gua`, `gw`, `lo`, `lu`, `Anda` remain disallowed). Combines with `no-ask`. Pass `--keep-pronoun` to `check_report.py` in Step 4. Any remaining text in the arguments is still used as notes.
+
 ## Requirements
 
 | Need | Used for |
@@ -60,7 +62,7 @@ Prompts are truncated at 1500 characters. If a truncation drops important contex
 - Merge prompts and commits that belong to one piece of work into one activity.
 - Keep the big outline only (W-33): 3-5 major outcomes. Drop or fold routine steps such as pulling changes, renaming files, typo fixes, retries, and install commands. Do the same for lessons and struggles: one or two main points.
 - Facts only from evidence or user notes (W-01). No facts in either → **stop and ask the user** what was done. Never guess.
-- Struggles (W-02): look for errors, bugs, reverts, or repeated retries in the evidence. If the user did not mention any struggle in their prompt/notes and none is clearly present in the evidence, **STOP before Step 3 (do not output a draft or auto-fill a "no struggle" placeholder)** and ask the user first—either via the agent's interactive question/grill tool if available (e.g., `ask_question` on Antigravity or similar prompts on other platforms) or with a direct question in the conversation (e.g., *"Ada kendala atau error tertentu hari ini, atau berjalan lancar tanpa kendala?"*). Only proceed to draft after the user replies. Never invent a struggle. *(Exception: `no-ask` mode below.)*
+- Struggles (W-02): look for errors, bugs, reverts, or repeated retries in the evidence. If the user did not mention any struggle in their prompt/notes and none is clearly present in the evidence, **STOP before Step 3 (do not output a draft or auto-fill a "no struggle" placeholder)** and ask the user first, using the agent's question tool if it has one, otherwise a direct question in chat (e.g., *"Ada kendala atau error tertentu hari ini, atau berjalan lancar tanpa kendala?"*). Only proceed to draft after the user replies. Never invent a struggle. *(Exception: `no-ask` mode below.)*
 
 ### No-ask mode
 
@@ -87,7 +89,7 @@ Read `references/writing-rules.md`. Hard rules in short:
 |---|---|
 | W-01 | Facts only from evidence or user notes |
 | W-02 | Struggles must be real; none found → ask |
-| W-10 | No person perspective: not `saya`, `aku`, `kami`, `kita`, `penulis`, `gue`, `gw`, `lo`, `Anda` |
+| W-10 | Impersonal by default (no `saya`, `aku`, `kami`, `kita`, `penulis`, `gue`, `gua`, `gw`, `lo`, `lu`, `Anda`); `saya` allowed with `--keep-pronoun` |
 | W-11 | Active phrasing in activities (no stiff `di-` passives; vary openings) |
 | W-20 | Natural semi-formal Indonesian; keep familiar tech terms, avoid stiff textbook translations (`galat`, `basis data`, `kedaluwarsa`) |
 | W-21 | No empty vocabulary: pengalaman berharga, luar biasa, etc. |
@@ -107,7 +109,7 @@ Tone and full examples: `references/examples.md`.
 Save the draft as JSON in `/tmp/maganghub-report.json` (never inside the user's project), then check it:
 
 ```bash
-python3 <skill-dir>/scripts/check_report.py /tmp/maganghub-report.json
+python3 <skill-dir>/scripts/check_report.py [--keep-pronoun] /tmp/maganghub-report.json
 ```
 
 ```json
@@ -125,7 +127,7 @@ Automatic checks:
 | Check | Content |
 |---|---|
 | G-1 | Every part at least 100 characters |
-| G-2 | No person pronouns (`saya`, `aku`, `kami`, `kita`, `penulis`, `gue`, `gw`, `lo`) |
+| G-2 | No person pronouns (`saya`, `aku`, `kami`, `kita`, `penulis`, `gue`, `gua`, `gw`, `lo`, `lu`, `Anda`); skipped when `--keep-pronoun` is set |
 | G-3 | No meta tags or notes |
 | G-4 | No em dash |
 | G-5 | Activities: 3-5 lines, all bulleted |
