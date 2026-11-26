@@ -42,13 +42,18 @@ Each rule has an ID (`W-xx`) referenced from `SKILL.md`. Rule explanations are i
 
 ### W-03 Lessons follow activities
 
-- **Pattern:** a lesson about something not done that day, or a claim that was not tested.
-- **Why it fails:** every lesson must trace back to an activity above it.
-- **Before:**
+- **Pattern:** a lesson about something not done that day, an untested claim, or a feature benefit/purpose restated as a lesson (*"fitur X membantu pengguna melakukan Y"*).
+- **Why it fails:** every lesson must trace back to an activity above it and capture an actual takeaway (how a mechanism works, a pattern, a pitfall, or a trade-off), not merely restate why the feature exists.
+- **Rule:** write what was learned from doing the work (technical behavior, workflow, or pitfall to watch out for), not generic platitudes (*"terlihat pentingnya..."*) or user-facing feature benefits.
+- **Before (off-topic):**
   > Dari pengerjaan hari ini, terlihat pentingnya arsitektur microservice dan Kubernetes.
   > (the day's work was form validation only)
 - **After:**
   > Dari pengerjaan validasi form hari ini, terlihat pentingnya mengecek input di sisi frontend sekaligus backend. Pesan error yang jelas untuk tiap aturan validasi juga sangat membantu pengguna tahu bagian mana yang perlu diperbaiki.
+- **Before (feature benefit, not a lesson):**
+  > Perbaikan pada sisi autorisasi membantu memastikan setiap pengguna hanya dapat mengakses halaman dan fitur sesuai hak aksesnya.
+- **After:**
+  > Dari perbaikan login dan autorisasi hari ini, alur pemisahan antara pengecekan identitas saat login dan pembatasan hak akses per peran jadi lebih jelas, termasuk bagian mana yang perlu dicek di frontend dan backend.
 
 ## Perspective
 

@@ -89,6 +89,7 @@ Read `references/writing-rules.md`. Hard rules in short:
 |---|---|
 | W-01 | Facts only from evidence or user notes |
 | W-02 | Struggles must be real; none found → ask |
+| W-03 | Lessons must trace to today's activities and state a real takeaway, not a feature benefit or generic platitude |
 | W-10 | Impersonal by default (no `saya`, `aku`, `kami`, `kita`, `penulis`, `gue`, `gua`, `gw`, `lo`, `lu`, `Anda`); `saya` allowed with `--keep-pronoun` |
 | W-11 | Active phrasing in activities (no stiff `di-` passives; vary openings) |
 | W-20 | Natural semi-formal Indonesian; keep familiar tech terms, avoid stiff textbook translations (`galat`, `basis data`, `kedaluwarsa`) |
