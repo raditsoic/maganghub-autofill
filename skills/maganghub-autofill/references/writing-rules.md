@@ -5,8 +5,8 @@ Each rule has an ID (`W-xx`) referenced from `SKILL.md`. Rule explanations are i
 | Group | Rules |
 |---|---|
 | Facts | W-01 facts only from evidence, W-02 real struggles only, W-03 lessons follow activities |
-| Perspective | W-10 no person perspective, W-11 active verbs, not di- passives |
-| Language | W-20 standard Indonesian, W-21 empty vocabulary, W-22 em dash and openers, W-23 hyperbole |
+| Perspective | W-10 impersonal by default (`saya` allowed with `--keep-pronoun`), W-11 active phrasing (no stiff `di-` passives) |
+| Language | W-20 natural semi-formal Indonesian & familiar tech terms, W-21 empty vocabulary, W-22 em dash and theatrical openers, W-23 hyperbole, W-24 humanized technical explanations |
 | Structure | W-30 activity bullets, W-31 one paragraph, W-32 100 characters, W-33 outline level only |
 | Safety | W-40 no secrets |
 | Form text | W-50 no meta |
@@ -15,112 +15,137 @@ Each rule has an ID (`W-xx`) referenced from `SKILL.md`. Rule explanations are i
 > **Never invent facts** (W-01). A rewrite adds no activity, tool, number, person, or incident that is not in the evidence or the user's notes. If detail is missing, ask the user or write a shorter honest version.
 
 > [!TIP]
-> **Do not over-sterilize.** A report with no specifics reads as machine-made just as clearly as one full of clichés. Use real feature, module, tool, and outcome names from the evidence.
+> **Keep it impersonal, not robotic.** Avoiding "saya" does not mean writing like a legal document. Use real feature, module, tool, and outcome names from the evidence, written in clear, flowing Indonesian that a mentor can read effortlessly.
 
 ## Facts
 
 ### W-01 Facts only from evidence
 
 - **Pattern:** an activity, result, or struggle that appears neither in the `collect_today.py` output nor in the user's notes.
-- **Why it fails:** the mentor reads the report and uses it for evaluation. A fabrication sounds convincing but is false, and it is the one pattern that is always a defect even when it reads well.
+- **Why it fails:** the mentor reads the report and uses it for evaluation. A fabrication sounds convincing but is false, and it is always a defect even when it reads well.
 - **Before:**
-  > Mengadakan rapat koordinasi dengan tim produk untuk membahas roadmap kuartal depan.
+  > Mengikuti rapat koordinasi dengan tim produk untuk membahas roadmap kuartal depan.
   > (no meeting in the evidence or notes)
 - **After:**
-  > Merancang skema tabel `users` dan `sessions` untuk modul autentikasi.
+  > Merancang struktur tabel `users` dan `sessions` di database untuk kebutuhan fitur login.
   > (taken from a real commit or prompt)
 
 ### W-02 Struggles only if real
 
 - **Pattern:** a generic struggle made up from general context: "sempat kesulitan memahami konsep baru", "keterbatasan waktu".
 - **Why it fails:** an invented struggle looks honest but is false. Mentors read the struggle section to find real blockers.
-- **Rule:** take struggles from errors, bugs, reverts, repeated retries, or hard decisions in the evidence, or from the user's notes. None found → **ask the user**, do not fill. If the user says there were none, write a short honest sentence that reaches the 100-character minimum without inventing an incident (see the no-struggle day in `examples.md`).
+- **Rule:** take struggles from errors, bugs, reverts, repeated retries, or hard decisions in the evidence, or from the user's notes. If the user did not mention a struggle and none is found in the evidence, **STOP before drafting** and ask the user first, using the agent's question tool if it has one, otherwise a direct question in chat. Do not output a draft or pre-fill a "no struggle" placeholder on your own (except in `no-ask` mode). Only after the user confirms there were no struggles, write a short honest paragraph that reaches the 100-character minimum without inventing an incident (see the no-struggle day in `examples.md`).
 - **Before:**
   > Kendala yang dialami berupa kesulitan memahami alur kerja yang kompleks sehingga membutuhkan waktu lebih lama.
 - **After:**
-  > Konfigurasi middleware menolak token yang valid. Masalah ditelusuri lewat urutan pemrosesan permintaan dan diselesaikan dengan memperbaiki urutan middleware.
+  > Sempat muncul kendala ketika sistem menolak token login yang sebenarnya masih valid. Setelah ditelusuri lewat log, penyebabnya ternyata urutan middleware yang tertukar, dan masalah selesai setelah urutannya diperbaiki.
 
 ### W-03 Lessons follow activities
 
-- **Pattern:** a lesson about something not done that day, or a claim that was not tested.
-- **Why it fails:** every lesson must trace back to an activity above it.
-- **Before:**
-  > Pemahaman tentang arsitektur microservice dan Kubernetes bertambah.
+- **Pattern:** a lesson about something not done that day, an untested claim, or a feature benefit/purpose restated as a lesson (*"fitur X membantu pengguna melakukan Y"*).
+- **Why it fails:** every lesson must trace back to an activity above it and capture an actual takeaway (how a mechanism works, a pattern, a pitfall, or a trade-off), not merely restate why the feature exists.
+- **Rule:** write what was learned from doing the work (technical behavior, workflow, or pitfall to watch out for), not generic platitudes (*"terlihat pentingnya..."*) or user-facing feature benefits.
+- **Before (off-topic):**
+  > Dari pengerjaan hari ini, terlihat pentingnya arsitektur microservice dan Kubernetes.
   > (the day's work was form validation only)
 - **After:**
-  > Pemahaman tentang validasi input di sisi klien dan server bertambah, termasuk perlunya pesan galat yang spesifik untuk tiap aturan validasi.
+  > Dari pengerjaan validasi form hari ini, terlihat pentingnya mengecek input di sisi frontend sekaligus backend. Pesan error yang jelas untuk tiap aturan validasi juga sangat membantu pengguna tahu bagian mana yang perlu diperbaiki.
+- **Before (feature benefit, not a lesson):**
+  > Perbaikan pada sisi autorisasi membantu memastikan setiap pengguna hanya dapat mengakses halaman dan fitur sesuai hak aksesnya.
+- **After:**
+  > Dari perbaikan login dan autorisasi hari ini, alur pemisahan antara pengecekan identitas saat login dan pembatasan hak akses per peran jadi lebih jelas, termasuk bagian mana yang perlu dicek di frontend dan backend.
 
 ## Perspective
 
-### W-10 No person perspective
+### W-10 Impersonal by default (`saya` allowed with `--keep-pronoun`)
 
-- **Pattern:** "saya", "aku", "kami", "kita", "penulis", and other pronouns that point at the actor. Includes "Anda" and the suffix "-ku".
-- **Why it fails:** the user's requirement is an impersonal report.
-- **Technique:** open each activity with an active meN- verb (Membuat, Menyusun, Memasang), which needs no pronoun. For lessons and struggles, use an activity noun (pemahaman, penyusunan) or the object as subject.
+- **Pattern:** `saya`, `aku`, `kami`, `kita`, `penulis`, `gue`, `gua`, `gw`, `lo`, `lu`, `Anda`.
+- **Why it fails:** by default, the report stays impersonal with no first- or second-person pronouns.
+- **Opt-in mode (`--keep-pronoun`):** when the user passes `keep-pronoun` or `--keep-pronoun`, first-person `saya` is allowed (and only `saya`; informal/other pronouns like `aku`, `kami`, `kita`, `penulis`, `gue`, `gua`, `gw`, `lo`, `lu`, `Anda` remain disallowed). See the keep-pronoun sample in `examples.md`.
+- **Technique (default impersonal):** keep it natural without falling into stiff nominalizations (*"Pemahaman tentang X bertambah"*, *"Penentuan Y belum menemukan keputusan akhir"*).
+  - In **activities**, open directly with an active verb (`Membangun ...`, `Memperbaiki ...`, `Berdiskusi ...`).
+  - In **lessons and struggles**, focus on what happened or what became clear: *"Dari pengerjaan hari ini, terlihat bahwa..."*, *"Ternyata..."*, *"Sempat muncul kendala ketika..."*, *"Tidak ada kendala teknis yang berarti hari ini..."*.
 - **Before:**
   > Hari ini saya membuat endpoint login dan saya menulis tes untuknya.
 - **After:**
-  > Membuat endpoint login beserta tes unit untuk memverifikasi respons sukses dan gagal.
+  > Membangun endpoint login di sisi backend lengkap dengan unit test untuk mengecek respons sukses dan gagal.
 
-### W-11 Active verbs, not di- passives
+### W-11 Active phrasing, not stiff `di-` passives
 
-- **Pattern:** activity bullets that open with a passive di- verb: "Dibuat ...", "Disusun ...", "Dipasang ...", or with an empty "Dilakukan ...".
-- **Why it fails:** the passive reads as stiff and mechanical. The user's required style is an active meN- verb with the actor left implicit, which still avoids any pronoun.
+- **Pattern:** activity bullets that open with a passive `di-` verb: `"Dibuat ..."`, `"Disusun ..."`, `"Dipasang ..."`, or an empty `"Dilakukan ..."`.
+- **Why it fails:** passive openings read as stiff and mechanical.
 - **Before:**
-  > Dibuat fitur ekspor laporan ke CSV. Dilakukan pengujian fitur. Diperbaiki format tanggal.
+  > - Dibuat fitur ekspor laporan ke CSV.
+  > - Dilakukan pengujian fitur.
+  > - Diperbaiki format tanggal.
 - **After:**
-  > Membuat fitur ekspor laporan ke CSV. Menguji fitur dengan 3 contoh data, menemukan kolom tanggal salah format, lalu memperbaikinya.
-- **Scope:** applies to the opening verb of every activity bullet. Inside lessons and struggles, a passive clause is allowed when the object is the real subject, but prefer the active form. Vary the verbs; do not open every bullet with the same one.
+  > - Membuat fitur ekspor laporan ke format CSV agar data bisa langsung diunduh.
+  > - Menguji fitur ekspor dengan 3 contoh data sekaligus memperbaiki format tanggal yang sempat keliru.
+- **Scope:** applies to the opening verb of every activity bullet. Any natural active verb works (`Membuat`, `Membangun`, `Memperbaiki`, `Berdiskusi`, `Mempelajari`, `Mencoba`, `Melanjutkan`). Vary them so the list does not feel repetitive. Inside lessons and struggles, passive clauses are fine when natural.
 
 ## Language
 
-### W-20 Standard Indonesian, technical terms unchanged
+### W-20 Natural semi-formal Indonesian, familiar tech terms
 
-- **Pattern:** mixing "gue/lo", chat abbreviations, or forced translation of technical terms ("kait" for hook, "gudang" for repository).
-- **Rule:** standard-register sentences. Library, language, tool, and command names and common loanwords (commit, endpoint, deploy, refactor) stay as they are.
+- **Pattern:** mixing chat slang (`gue/lo`, `bgt`, `yg`, `dgn`), OR forcing stiff textbook/KBBI translations for everyday tech terms (`galat` for error, `basis data` for database, `kedaluwarsa` for expired, `sah` for valid, `variabel lingkungan` for env/environment variable, `lingkungan bersih` for clean environment, `peninjauan kode` for code review, `kait` for hook).
+- **Rule:** write in natural, polite semi-formal Indonesian, as if giving a progress update to a mentor. Keep everyday technical terms in their familiar form (`error`, `bug`, `database`, `backend`, `API`, `login`, `expired`, `valid`, `env`, `code review`, `deploy`, `unit test`).
 
 ### W-21 Empty vocabulary
 
-- **Pattern:** "luar biasa", "sangat bermanfaat", "pengalaman berharga", "di era digital", "membuka wawasan", "sebuah perjalanan".
-- **Why it fails:** reads as filler and carries no information.
+- **Pattern:** `"luar biasa"`, `"sangat bermanfaat"`, `"pengalaman berharga"`, `"di era digital"`, `"membuka wawasan"`, `"sebuah perjalanan"`.
+- **Why it fails:** reads as filler and carries no real information.
 - **Before:**
-  > Kegiatan ini memberikan pengalaman berharga yang membuka wawasan tentang dunia kerja.
+  > Kegiatan ini memberikan pengalaman berharga yang sangat bermanfaat dan membuka wawasan tentang dunia kerja.
 - **After:**
-  > Alur peninjauan kode dengan mentor memperjelas standar penamaan dan struktur modul yang dipakai tim.
+  > Lewat sesi code review bersama mentor, standar penamaan dan struktur folder yang biasa dipakai tim jadi jauh lebih jelas sehingga kode lebih mudah dibaca orang lain.
 
 ### W-22 Em dash and theatrical openers
 
-- **Pattern:** `—`, ` -- `, "Pada dasarnya", "Intinya", "Hari ini adalah hari yang penuh tantangan".
-- **Rule:** replace an em dash with a period or comma. Delete openers that add no fact.
+- **Pattern:** `—`, ` -- `, `"Pada dasarnya"`, `"Intinya"`, `"Hari ini adalah hari yang penuh tantangan"`.
+- **Rule:** replace an em dash with a comma or period. Delete dramatic openers that add no fact.
 
 ### W-23 Hyperbole and unevidenced results
 
-- **Pattern:** "berhasil sempurna", "seluruh bug teratasi", "performa meningkat drastis".
-- **Rule:** write results that can be verified (N tests pass, endpoint X returns 200). Numbers only from the evidence.
+- **Pattern:** `"berhasil sempurna"`, `"seluruh bug teratasi"`, `"performa meningkat drastis"`.
+- **Rule:** write grounded results that match the evidence. Only include numbers when they appear in the evidence or user notes.
 - **Before:**
-  > Performa query meningkat drastis.
+  > Performa query meningkat drastis dan semua berjalan sempurna.
 - **After:**
-  > Query daftar pesanan ditambah indeks pada kolom `created_at`, waktu respons turun dari 1,2 detik menjadi 0,3 detik.
+  > Menambahkan indeks pada kolom `created_at` di tabel pesanan sehingga waktu muat daftar pesanan turun dari 1,2 detik menjadi 0,3 detik.
   > (only if that figure is in the evidence or notes)
+
+### W-24 Humanized technical explanations (not a raw git log)
+
+- **Pattern:** stacking raw implementation jargon without functional context (*"Mengimplementasikan middleware pembaca header untuk validasi token akses pada endpoint HTTP"*), or using literal English-to-Indonesian calques (*"terbukti memengaruhi"*, *"menemukan keputusan akhir"*, *"pada lingkungan bersih"*).
+- **Why it fails:** even when the reader understands technical concepts, dry jargon dumps read like machine output rather than a human report.
+- **Rule:** technical terms are welcome, but explain them in clear, flowing language tied to the feature, purpose, or impact on users and the system. Avoid literal translations and heavy nominalizations (`Pemahaman tentang ... bertambah`, `Pelaksanaan ... berjalan`).
+- **Before:**
+  > - Memperbaiki urutan middleware yang menyebabkan token valid ditolak.
+  >
+  > Urutan middleware pada permintaan HTTP terbukti memengaruhi hasil validasi token.
+- **After:**
+  > - Memperbaiki bug di alur login yang sempat menolak token valid karena urutan pengecekan middleware tertukar.
+  >
+  > Dari masalah hari ini, terlihat jelas bahwa urutan middleware di backend sangat krusial, karena kalau urutannya salah, pengecekan autentikasi bisa langsung menolak akses meskipun data login pengguna sudah benar.
 
 ## Structure
 
 ### W-30 Activities as bullets
 
-- **Rule:** 3 to 5 lines, each starting with `- `, one activity per line, one sentence: what was done and the result. Merge commits and prompts that belong to one piece of work.
+- **Rule:** 3 to 5 lines, each starting with `- `, one main activity per line, one clear sentence: what was done and why/the outcome. Merge commits and prompts that belong to one piece of work.
 
 ### W-33 Outline level only
 
 - **Pattern:** routine steps and small fixes listed as their own activities: pulling the latest changes, renaming a file, fixing a typo, running a command, retrying a failed step, installing a dependency.
 - **Why it fails:** the mentor wants the big picture of the day. Small steps bury the real outcomes and make the report read like a shell history.
-- **Rule:** report only the major outcomes: a feature built, a design decided, a problem investigated, a document written, a deployment done. Fold small steps into the outcome they serve or drop them. Test: if removing the line would not change what the mentor understands about the day, drop it. Same for lessons and struggles: one or two main points, not every hiccup.
+- **Rule:** report only the major outcomes: a feature built, a design decided, a bug investigated, a document written, a deployment done. Fold small steps into the outcome they serve or drop them. Test: if removing the line would not change what the mentor understands about the day, drop it. Same for lessons and struggles: one or two main points, not every hiccup.
 - **Before:**
   > - Menarik perubahan terbaru dari repositori.
   > - Memperbaiki salah ketik pada README.
   > - Mengganti nama berkas konfigurasi.
   > - Membuat modul autentikasi berbasis JWT.
 - **After:**
-  > - Membuat modul autentikasi berbasis JWT beserta pengujiannya.
+  > - Membangun fitur autentikasi login berbasis JWT lengkap dengan pengujiannya.
 
 ### W-31 Lessons and struggles in one paragraph
 
@@ -128,16 +153,16 @@ Each rule has an ID (`W-xx`) referenced from `SKILL.md`. Rule explanations are i
 
 ### W-32 At least 100 characters per part
 
-- **Rule:** form validation. Add real detail, not filler. If the evidence is truly thin, ask the user.
+- **Rule:** form validation. Add real context or detail from the evidence, not filler. If the evidence is truly thin, ask the user.
 
 ## Safety
 
 ### W-40 No secrets
 
-- **Rule:** never write tokens, passwords, internal URLs, IPs, confidential client names, or personal data seen in chats or commits. Refer to them generically ("layanan autentikasi", "basis data staging").
+- **Rule:** never write tokens, passwords, internal URLs, IPs, confidential client names, or personal data seen in chats or commits. Refer to them generically ("layanan autentikasi", "database staging").
 
 ## Text that enters the form
 
 ### W-50 No meta
 
-- **Rule:** form text is report content only. Forbidden: `[INFERENCE ...]`, "Catatan:", "Perlu konfirmasi", greetings, chat closers ("Semoga membantu"). Notes for the user go outside the draft.
+- **Rule:** form text is report content only. Forbidden: `[INFERENCE ...]`, `"Catatan:"`, `"Perlu konfirmasi"`, greetings, chat closers (`"Semoga membantu"`). Notes for the user go outside the draft.
